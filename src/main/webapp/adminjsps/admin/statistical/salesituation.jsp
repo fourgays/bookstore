@@ -13,70 +13,64 @@
 <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
 <script language="JavaScript">
     $(document).ready(function() {
-        var chart = {
-            type: 'column'
-        };
         var title = {
-            text: '销售书籍排行'
+            text: '最近七日销售量'
         };
         var subtitle = {
             text: ''
         };
         var xAxis = {
-            categories: [],
-            crosshair: true
+            categories: []
         };
         var yAxis = {
-            min: 0,
             title: {
-                text: '销售量'
-            }
-        };
-        var tooltip = {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        };
-        var plotOptions = {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0,
-                pointWidth: 30
-            }
-        };
-        var credits = {
-            enabled: false
+                text: '销售量(元)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
         };
 
-        var series= [{
-            data: []
-        }];
+        var tooltip = {
+            valueSuffix: '\xB0C'
+        };
+
+        var legend = {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        };
+
+        var series =  [{
+                data: []
+            }];
         $.ajax({
             type:"GET",
             dataType:"JSON",
             contentType : "application/json",
             async:false,
-            url:"<c:url value='/admin/StatisticalServlet?method=RankSaleBook'/>",
+            url:"<c:url value='/admin/StatisticalServlet?method=salesituation'/>",
             success:function (result) {
-                for(var i = 0;i<5;i++){
-                    xAxis.categories[i] = result[i].bname;
-                    series[0].data[i]=result[i].num;
+                for(var i = 0;i<7;i++){
+                    var time = new Date(result[i].ordertime);
+                    xAxis.categories[i] = time.getFullYear()+"年"+(time.getMonth()+1)+"月"+time.getDate()+"日";
+                    series[0].data[i]=result[i].total;
                 }
             }
         });
         var json = {};
-        json.chart = chart;
+
         json.title = title;
         json.subtitle = subtitle;
-        json.tooltip = tooltip;
         json.xAxis = xAxis;
         json.yAxis = yAxis;
+        json.tooltip = tooltip;
+        json.legend = legend;
         json.series = series;
-        json.plotOptions = plotOptions;
-        json.credits = credits;
+
         $('#container').highcharts(json);
     });
 </script>

@@ -37,8 +37,8 @@ function load() {
 	bar1.add("用户管理", "查看用户", "<c:url value='/admin/AdminUserServlet?method=findAllUsers'/>", "body");
 	bar1.add("用户管理", "查找用户 ", "<c:url value='/admin/AdminBookServlet?method=addPre'/>", "body");
 
-    bar1.add("销售详情", "销售书籍排行", "<c:url value='/admin/StatisticalServlet?method=RankSaleBook'/>", "body");
-    bar1.add("销售详情", "订单数量排行 ", "<c:url value='/admin/AdminBookServlet?method=addPre'/>", "body");
+    bar1.add("销售详情", "销售书籍排行", "<c:url value='/adminjsps/admin/statistical/booksales.jsp'/>", "body");
+    bar1.add("销售详情", "最近七日销售量 ", "<c:url value='/adminjsps/admin/statistical/salesituation.jsp'/>", "body");
 
     var d = document.getElementById("menu");
 	d.innerHTML = bar1.toString();
