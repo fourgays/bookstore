@@ -1,5 +1,6 @@
 package cn.xkx.bookstore.user.service;
 
+import cn.xkx.bookstore.book.domain.Book;
 import cn.xkx.bookstore.book.domain.PageBean;
 import cn.xkx.bookstore.user.dao.UserDao;
 import cn.xkx.bookstore.user.domain.User;
@@ -72,4 +73,11 @@ public class UserService {
 	public PageBean<User> findAllUsers(int pc, int ps) {
 		return userDao.findAllUsers(pc,ps);
 	}
+	public Boolean findUserByUsername(String username) {
+		return userDao.findUserByUsername(username);
+	}
+	public Boolean findUserByEmail(String email) {
+		return userDao.findUserByEmail(email);
+	}
+
 }

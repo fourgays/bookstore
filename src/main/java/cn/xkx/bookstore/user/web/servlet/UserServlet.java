@@ -111,9 +111,7 @@ public class UserServlet extends BaseServlet {
 			// 1. 保存错误信息
 			// 2. 保存表单数据
 			// 3. 转发到regist.jsp
-			request.setAttribute("errors", errors);
-			request.setAttribute("form", form);
-			return "f:/jsps/user/regist.jsp";
+			return "f:/jsps/user/SignUp/SignUp.jsp";
 		}
 
 		/*
@@ -127,7 +125,7 @@ public class UserServlet extends BaseServlet {
 			 */
 			request.setAttribute("msg", e.getMessage());
 			request.setAttribute("form", form);
-			return "f:/jsps/user/regist.jsp";
+			return "f:/jsps/user/SignUp/SignUp.jsp";
 		}
 
 		/*
@@ -187,7 +185,7 @@ public class UserServlet extends BaseServlet {
 			if (errors.size() > 0) {
 				request.setAttribute("errors", errors);
 				request.setAttribute("form", form);
-				return "f:/jsps/user/login.jsp";
+				return "f:/jsps/user/SignIn/SignIn.jsp";
 			}
 			// 调用userService进行验证
 			User user = userService.login(form);
@@ -202,9 +200,9 @@ public class UserServlet extends BaseServlet {
 			request.getSession().setAttribute("cart", new Cart());
 			return "r:/jsps/main.jsp";
 		} catch (UserException e) {
-			request.setAttribute("msg", e.getMessage());
+			request.getSession().setAttribute("msg", e.getMessage());
 			request.setAttribute("form", form);
-			return "f:/jsps/user/login.jsp";
+			return "f:/jsps/user/SignIn/SignIn.jsp";
 		}
 	}
 
@@ -215,11 +213,22 @@ public class UserServlet extends BaseServlet {
 		String userType = request.getParameter("userType");
 		request.getSession().invalidate();
 		if (userType.equals("user")) {
-			return "r:/jsps/user/login.jsp";
+			return "r:/jsps/user/SignIn/SignIn.jsp";
 		} else {
 			return "r:/adminjsps/administrator/login.jsp";
 		}
 
+	}
+
+	public void findUserByUsername(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		String username=request.getParameter("username");
+		response.getWriter().print(userService.findUserByUsername(username));
+	}
+	public void findUserByEmail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		String email=request.getParameter("email");
+		response.getWriter().print(userService.findUserByEmail(email));
 	}
 
 }
