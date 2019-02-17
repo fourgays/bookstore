@@ -107,4 +107,28 @@ public class UserDao {
 			throw new RuntimeException(e);
 		}
 	}
+	public boolean findUserByUsername(String username) {
+		String sql = "SELECT * FROM tb_user where username=? and userType = ?";
+		try {
+
+			Object[] params = { username,"user" };
+			User bean = qr.query(sql, new BeanHandler<User>(User.class), params);
+
+			return bean!=null;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public boolean findUserByEmail(String email) {
+		String sql = "SELECT * FROM tb_user where email=?";
+		try {
+			Object[] params = { email};
+			User bean = qr.query(sql, new BeanHandler<User>(User.class), params);
+			return bean!=null;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+
 }

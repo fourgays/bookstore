@@ -24,7 +24,7 @@
 		<ul style="list-style-type: none;">
 			<li>管理员：<a
 				href="<c:url value='/adminjsps/administrator/login.jsp'/>">点击此处登录</a></li>
-			<li>用户：<a href="<c:url value='/jsps/user/login.jsp'/>">点击此处登录</a></li>
+			<li>用户：<a href="<c:url value='/jsps/user/SignIn/SignIn.jsp'/>">点击此处登录</a></li>
 		</ul>
 	</div>
 </body>

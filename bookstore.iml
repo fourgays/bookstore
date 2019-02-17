@@ -64,5 +64,7 @@
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.main.javaee-api:javax.jms:3.1.2.2" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.47" level="project" />
+    <orderEntry type="library" name="respond" level="application" />
+    <orderEntry type="library" name="html5shiv" level="application" />
   </component>
 </module>
