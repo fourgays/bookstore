@@ -63,7 +63,7 @@ public class BookDao {
 			int tr = number.intValue();
 			pb.setTr(tr);
 
-			Object[] params = { cid, ps * pc, ps * (pc - 1) };
+			Object[] params = { cid, ps * (pc-1), ps * pc  };
 			List<Book> beanList = qr.query(sql, new BeanListHandler<Book>(Book.class), params);
 
 			pb.setBeanList(beanList);
