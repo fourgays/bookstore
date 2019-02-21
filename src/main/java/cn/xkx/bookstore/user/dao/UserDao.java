@@ -129,6 +129,4 @@ public class UserDao {
 			throw new RuntimeException(e);
 		}
 	}
-
-
 }
