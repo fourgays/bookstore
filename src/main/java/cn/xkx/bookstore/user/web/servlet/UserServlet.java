@@ -21,10 +21,12 @@ import cn.itcast.commons.CommonUtils;
 import cn.itcast.mail.Mail;
 import cn.itcast.mail.MailUtils;
 import cn.itcast.servlet.BaseServlet;
+import cn.xkx.bookstore.Utils.MD5Utils;
 import cn.xkx.bookstore.cart.domain.Cart;
 import cn.xkx.bookstore.user.domain.User;
 import cn.xkx.bookstore.user.service.UserException;
 import cn.xkx.bookstore.user.service.UserService;
+import sun.security.provider.MD5;
 
 @WebServlet("/UserServlet")
 public class UserServlet extends BaseServlet {
@@ -97,7 +99,7 @@ public class UserServlet extends BaseServlet {
 		} else if (password.length() < 3 || password.length() > 10) {
 			errors.put("password", "密码长度必须在3~10之间！");
 		}
-
+		form.setPassword(MD5Utils.getMD5(form.getPassword()));
 		String email = form.getEmail();
 		if (email == null || email.trim().isEmpty()) {
 			errors.put("email", "Email不能为空！");
@@ -169,6 +171,7 @@ public class UserServlet extends BaseServlet {
 		 * 4.若成功保存user到session，然后重定向到主页index.jsp
 		 */
 		User form = CommonUtils.toBean(request.getParameterMap(), User.class);
+		form.setPassword(MD5Utils.getMD5(form.getPassword()));
 		try {
 			/*
 			 * 登录输入校验
